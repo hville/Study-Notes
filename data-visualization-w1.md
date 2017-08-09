@@ -2,16 +2,18 @@
 # Data Visualization - Week 1
 
 * 1-Data set: gapminder
-* 2-Topic: *is urban population assiciated with co2 emissions*
+* 2-Topic: *is urban population associated with CO₂ emissions*
   * wealth&growth vs efficiency
-  * Interest: Energy, CO2
+  * Interest: Energy, CO₂
 * 3-Code book (Variables):
   * urban population: %
   * residential electricity per person: kWh/person
   * oil cunsumption: t/y/person
   * co2emissions t/y
   * income $/person
-* 4-Secondary Question: *is urban population associated with energy types (oil vs electricity)*
+* 4-Secondary Question:
+  * *is urban population associated with energy types (oil vs electricity)*
+  * urban population may consume less oil directly but may compensate with greater electricity consumption
 * 5-oil vs electricity, wealth vs energy
 * 6-literature
   * [CO2 emissions, economic growth, energy consumption, trade and urbanization in new EU member and candidate countries: A panel data analysis](http://www.sciencedirect.com/science/article/pii/S0264999314003770)
