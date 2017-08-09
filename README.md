@@ -32,5 +32,9 @@
   * organize, sumarize, patterns, deviations
   * examine distribution
 * python
-  * https://www.continuum.io/
+  * [www.continuum.io](https://www.continuum.io/)
+* [**week-2 task**](data-visualization-w2.md)
+* [**week-2 code**](./code/code_w2.py)
+
+
 
