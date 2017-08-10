@@ -36,5 +36,15 @@
 * [**week-2 task**](data-visualization-w2.md)
 * [**week-2 code**](./code/code_w2.py)
 
+### Week 3
 
-
+* Data Management: decisions about data
+  * tools: code book, frequency distribution
+  * trim missing Data (NaN for python)
+  * rescale/normalise variables (same units)
+  * reverse scaling (recoding frequency vs time)
+  * secondary variables (combination of variables)
+  * categorical --> quantitative
+  * quantitative --> categorical
+* [**week-3 task**](data-visualization-w3.md)
+* [**week-3 code**](./code/code_w3.py)
