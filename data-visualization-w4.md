@@ -50,7 +50,7 @@ Full code in [this file](./code/code_w4.py)
 
 ## Distribution of Source Variables
 
-![Source Variables](/w4-source-dist.png)
+![Source Variables](img/w4-source-dist.png)
 
 From the unimodal distibution plot of these 4 source variables:
 * `oilperperson`: unimodal @0, right skew
@@ -88,7 +88,7 @@ The oil and electric power consumption both tend to rize with the urban populati
 
 ## Distribution of Composit Variables
 
-![Composit Variables](/w4-calc-dist.png)
+![Composit Variables](img/w4-calc-dist.png)
 
 From the unimodal distibution plot of these 4 source variables:
 * `kgoilperincome`: unimodal @0, right skew
@@ -107,7 +107,8 @@ From the unimodal distibution plot of these 4 source variables:
 
 ## Scatterplot and interpretation
 
-![Composit Variables](/w4-urbanrate-oilperincome-scatter.png)
-![Composit Variables](/w4-urbanrate-relectricperincome-scatter.png)
+![Composit Variables](img/w4-urbanrate-oilperincome-scatter.png)
+![Composit Variables](img/w4-urbanrate-relectricperincome-scatter.png)
 ￼
+
 Although the oil and electrical consumption per person both increases with income, the consumption of both these energy measures per income decreases with the urban population ratio. This suggest that urbanization might be a driver in reducing energy consumption for a given income level.
