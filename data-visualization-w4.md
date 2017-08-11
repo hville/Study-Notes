@@ -4,99 +4,110 @@
 ## Code
 
 ```python
+data = pandas.read_csv('../data/gapminder.csv', low_memory=False)
+
+# convert values to float, ignoring empty values
+print('Source Variables')
+axs = plt.subplots(ncols=4, nrows=1)
+for i, key in enumerate(['oilperperson', 'relectricperperson', 'urbanrate', 'incomeperperson']):
+  # to numeric values
+  data[key] = data[key].apply(lambda x: float(x) if x != ' ' else numpy.nan)
+  # histogram
+  seaborn.distplot(data[key].dropna(), kde=False, ax=axs[1][i])
+  print(data[key].describe())
+
+# new combined variables
+print('Derived Variables')
+data['kgoilperincome'] = 1000 * data.oilperperson / data.incomeperperson
+data['relectricperincome'] = data.relectricperperson / data.incomeperperson
+
+# histogram
+axs = plt.subplots(ncols=2, nrows=1)
+for i, key in enumerate(['kgoilperincome', 'relectricperincome']):
+  seaborn.distplot(data[key].dropna(), kde=False, ax=axs[1][i])
+  print(data[key].describe())
+
+# Scatterplots
+for i, key in enumerate(['oilperperson', 'relectricperperson', 'incomeperperson']):
+    axs = plt.subplots(ncols=1, nrows=1)
+    seaborn.regplot(x="urbanrate", y=key, data=data)
+
+for i, key in enumerate(['kgoilperincome', 'relectricperincome']):
+    axs = plt.subplots(ncols=1, nrows=1)
+    seaborn.regplot(x="urbanrate", y=key, data=data)
 ```
 
 Full code in [this file](./code/code_w4.py)
 
-## Results and Observations
 
-
-
-ASSIGNMENT
-* univariate graph for each selected variables? (2 points)
-  * center and spread
-* bivariate graph for the selected variables? (2 points)
-  * title, labels
-* summary: distribution and relationship
-
-
-
-
-
-### Selected Source Variables
+## Selected Source Variables
 
 * `oilperperson`: metric tons of oil / year / person
 * `relectricperperson`: residential electric consumption kWh / year / person
 * `urbanrate`: Urban population %
 * `incomeperperson`: $ / person
 
-### Source Data Treatment
 
-Missing values in the CSV files (empty strings `' '`) were converted to `NaN`
-* `oilperperson`: 150 / 213
-* `relectricperperson`: 77 / 213
-* `urbanrate`: 10 / 213
-* `incomeperperson`: 23 / 213
+## Distribution of Source Variables
 
-### Source Data Cross-tab Analysis
+![Source Variables](/w4-source-dist.png)
 
-The full frequency tables are not shown here because the values for each 213 countries are mostly unique for each country (i.e. frequency == 1, probability == 1/213). Exceptions are empty values that were converted to `NaN` as listed above
+From the unimodal distibution plot of these 4 source variables:
+* `oilperperson`: unimodal @0, right skew
+  * count   63.000000
+  * mean     1.484085
+  * std      1.825090
+  * min      0.032281
+  * max     12.228645
+* `relectricperperson`: unimodal @0, right skew
+  * count     136.000000
+  * mean     1173.178995
+  * std      1681.440173
+  * min         0.000000
+  * max     11154.755033
+* `urbanrate`: bimodal, left skew
+  * count   203.000000
+  * mean     56.769360
+  * std      23.844933
+  * min      10.400000
+  * max     100.000000
+* `incomeperperson`: unimodal @0, right skew
+  * count      190.000000
+  * mean      8740.966076
+  * std      14262.809083
+  * min        103.775857
+  * max     105147.437697
 
-Instead, each variable was grouped into quartiles and compared to the `urbanrate`, the urban population ratio
 
-```text
-incomeperperson  Q1  Q2  Q3  Q4
-urbanrate
-Q1               30  11   4   3
-Q2               16  19  12   1
-Q3                2  14  19  11
-Q4                0   2  12  33
+## Selected Composit Variables
 
-relectricperperson  Q1  Q2  Q3  Q4
-urbanrate
-Q1                  14   5   0   1
-Q2                  14  12   7   2
-Q3                   4  11  17   9
-Q4                   1   6  10  21
+The oil and electric power consumption both tend to rize with the urban population ratio but so is the income per person. Since income is very likely to cause increased energy consumption, 2 new composite variables were created:
+* `kgoilperincome = 1000 * oilperperson / incomeperperson`
+* `relectricperincome = relectricperperson / incomeperperson`
 
-oilperperson  Q1  Q2  Q3  Q4
-urbanrate
-Q1             4   1   0   0
-Q2             5   2   1   0
-Q3             6   9   7   3
-Q4             1   4   7  12
-```
 
-### Composit Variables
+## Distribution of Composit Variables
 
-The oil and electric power consumption both tend to rize with the urban population ratio but so is the income per person. Since income is very likely to cause increased energy consumption, 3 new composite variables were created:
-* `kgoilperincome`: 1000 * `oilperperson` / `incomeperperson`
-* `relectricperincome`: `relectricperperson` / `incomeperperson`
-* `relectricperoil`: `relectricperperson` / `oilperperson`
+![Composit Variables](/w4-calc-dist.png)
 
-### Composit Variables Cross-tab Analysis
+From the unimodal distibution plot of these 4 source variables:
+* `kgoilperincome`: unimodal @0, right skew
+  * count   61.000000
+  * mean     0.156447
+  * std      0.119273
+  * min      0.039493
+  * max      0.538605
+* `relectricperincome`: unimodal @~0.2, right skew
+  * count   130.000000
+  * mean      0.206968
+  * std       0.217425
+  * min       0.000000
+  * max       1.453452
 
-```text
-relectricperoil  Q1  Q2  Q3  Q4
-urbanrate
-Q1                1   1   2   1
-Q2                2   4   1   1
-Q3                4   7   8   6
-Q4                9   3   4   8
 
-relectricperincome  Q1  Q2  Q3  Q4
-urbanrate
-Q1                   4   3   5   7
-Q2                   6   9   7  13
-Q3                  10   9  12   9
-Q4                  13  11   8   4
+## Scatterplot and interpretation
 
-kgoilperincome  Q1  Q2  Q3  Q4
-urbanrate
-Q1               1   0   3   1
-Q2               0   1   3   4
-Q3               7   8   4   6
-Q4               8   6   5   4
-```
-
-The composit variables with the income portion removed paint a more nuanced picture and is not clear at this level of granularity what are the relationships, if any.
+![Composit Variables](/w4-urbanrate-oilperincome-scatter.png)
+![Composit Variables](/w4-urbanrate-relectricperincome-scatter.png)
+￼
+Although the oil and electrical consumption per person both increases with income, the consumption of both these energy measures per income decreases with the urban population ratio. This suggest that urbanization might be a driver in reducing energy consumption for a given income level.
