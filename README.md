@@ -76,5 +76,5 @@
     * or C=bin(Q): barchart
   * Q->C: bin Q in 2 cat (eg 0:No, 1:Yes)
   * C->Q: C->E(Q) barchart
-* [**week-3 task**](data-visualization-w3.md)
-* [**week-3 code**](./code/code_w3.py)
+* [**week-4 task**](data-visualization-w4.md)
+* [**week-4 code**](./code/code_w4.py)
